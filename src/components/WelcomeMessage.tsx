@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Bot, Heart, Sparkles } from 'lucide-react';
+import { Bot, Heart, Sparkles, MessageSquare } from 'lucide-react';
 
 const WelcomeMessage = () => {
   return (
@@ -15,20 +15,32 @@ const WelcomeMessage = () => {
       </h1>
       
       <p className="text-gray-600 text-lg mb-6 max-w-md leading-relaxed">
-        Hi there! I'm your friendly AI assistant, powered by Google Gemini. 
+        Hi there! I'm your friendly AI assistant, powered by OpenAI. 
         I'm here to help, chat, and make your day a little brighter! ✨
       </p>
       
-      <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 max-w-sm">
-        <div className="flex items-center gap-2 text-purple-600 mb-2">
-          <Sparkles size={16} />
-          <span className="font-medium">Try asking me:</span>
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 max-w-sm">
+        <div className="flex items-center gap-2 text-purple-600 mb-3">
+          <MessageSquare size={16} />
+          <span className="font-medium">Start a conversation:</span>
         </div>
-        <ul className="text-sm text-gray-600 space-y-1">
-          <li>• "Tell me a fun fact"</li>
-          <li>• "Help me brainstorm ideas"</li>
-          <li>• "What's the weather like?"</li>
-          <li>• "Write me a poem"</li>
+        <ul className="text-sm text-gray-600 space-y-2">
+          <li className="flex items-center gap-2">
+            <Sparkles size={12} className="text-purple-400" />
+            "Tell me a fun fact"
+          </li>
+          <li className="flex items-center gap-2">
+            <Sparkles size={12} className="text-purple-400" />
+            "Help me brainstorm ideas"
+          </li>
+          <li className="flex items-center gap-2">
+            <Sparkles size={12} className="text-purple-400" />
+            "Write me a poem"
+          </li>
+          <li className="flex items-center gap-2">
+            <Sparkles size={12} className="text-purple-400" />
+            "What's trending in tech?"
+          </li>
         </ul>
       </div>
     </div>
