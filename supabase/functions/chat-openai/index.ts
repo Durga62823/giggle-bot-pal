@@ -15,7 +15,7 @@ serve(async (req) => {
   try {
     const { message } = await req.json();
 
-    const geminiApiKey = "AIzaSyBRIdZnJyxYcLzSYHNFaF90hK_A7rsd2cY";
+    const geminiApiKey ="AIzaSyBRIdZnJyxYcLzSYHNFaF90hK_A7rsd2cY";
     if (!geminiApiKey) {
       throw new Error("Gemini API key not configured");
     }
