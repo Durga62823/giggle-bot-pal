@@ -89,7 +89,7 @@ const Auth = ({ onSuccess }: AuthProps) => {
             <User className="text-white" size={24} />
           </div>
           <h1 className="text-2xl font-bold text-gray-800 mb-2">
-            {isLogin ? 'Welcome Back!' : 'Create Account'}
+          {isLogin ? 'Welcome Back!' : 'Create Account'}
           </h1>
           <p className="text-gray-600">
             {isLogin ? 'Sign in to continue your conversations' : 'Join us to start chatting with AI'}
