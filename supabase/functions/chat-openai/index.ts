@@ -15,40 +15,41 @@ serve(async (req) => {
   try {
     const { message } = await req.json()
 
-    const openaiApiKey = Deno.env.get('OPENAI_API_KEY')
-    if (!openaiApiKey) {
-      throw new Error('OpenAI API key not configured')
+    const geminiApiKey = Deno.env.get('GEMINI_API_KEY')
+    if (!geminiApiKey) {
+      throw new Error('Gemini API key not configured')
     }
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${geminiApiKey}`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${openaiApiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [
+        contents: [
           {
-            role: 'system',
-            content: 'You are a helpful, friendly AI assistant. Respond in a conversational and engaging way. Use emojis occasionally to make responses more lively and personable.'
-          },
-          {
-            role: 'user',
-            content: message
+            parts: [
+              {
+                text: `You are a helpful, friendly AI assistant. Respond in a conversational and engaging way. Use emojis occasionally to make responses more lively and personable. User message: ${message}`
+              }
+            ]
           }
         ],
-        max_tokens: 500,
-        temperature: 0.7,
+        generationConfig: {
+          temperature: 0.7,
+          topK: 40,
+          topP: 0.95,
+          maxOutputTokens: 500,
+        }
       }),
     })
 
     if (!response.ok) {
-      throw new Error(`OpenAI API error: ${response.status}`)
+      throw new Error(`Gemini API error: ${response.status}`)
     }
 
     const data = await response.json()
-    const aiMessage = data.choices[0]?.message?.content || "I'm sorry, I couldn't generate a response."
+    const aiMessage = data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't generate a response."
 
     return new Response(
       JSON.stringify({ message: aiMessage }),
